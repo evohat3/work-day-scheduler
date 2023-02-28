@@ -52,11 +52,11 @@ $('.saveBtn').click(function() {
     }
   });
 });
-// ****** SAVE BUTTON ****** //
+// ****** SAVE BUTTON ****** 
 
 
 
-// ****** RETRIEVE SAVED DATA FROM LOCAL STORAGE ****** //
+// ****** RETRIEVE SAVED DATA FROM LOCAL STORAGE ****** 
 const savedData = [];
 for (let i = 0; i < localStorage.length; i++) {
   const key = localStorage.key(i);
@@ -69,10 +69,9 @@ for (let i = 0; i < localStorage.length; i++) {
 // and sorts data so that it shows accordingly
 const newData = savedData.filter(item => item.task.trim() !== '');
 sortData = newData.sort((a, b) => a - b);
-// ****** RETRIEVE SAVED DATA FROM LOCAL STORAGE ****** //
 
 
-// ****** DISPLAY SAVED DATA FROM LOCAL STORAGE WITH REMOVE BUTTON ****** //
+// ****** DISPLAY SAVED DATA FROM LOCAL STORAGE WITH REMOVE BUTTON ****** 
 newData.forEach((data) => {
   const hour = data.hour;
   const taskTime = data.task;
@@ -86,11 +85,6 @@ newData.forEach((data) => {
     $li.remove();
   });
 });
-// ****** DISPLAY SAVED DATA FROM LOCAL STORAGE WITH REMOVE BUTTON ****** //
-
-
-
-
 
 // ****** TIME BLOCK ****** //
 function updateTimeBlocks() {
@@ -111,4 +105,4 @@ function updateTimeBlocks() {
     }
   });
 }
-// ****** TIME BLOCK ****** //
+
