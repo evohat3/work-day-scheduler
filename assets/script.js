@@ -27,6 +27,9 @@
 //** ***GLOBAL SCOPE *** **/
 
 
+
+
+
 // ****** CURRENT DATE & TIME ****** //
  setInterval(function() {
   curDay = dayjs();
@@ -37,7 +40,87 @@
 // ****** CURRENT DATE & TIME ****** //
 
 
+
+
+
+
 // ****** SAVE BUTTON ****** //
+//TODO NEEDS a way to store id hour text
+
+/* //  < ------ delete
+
+
+$('.saveBtn').click(function() {
+  
+  //const taskTime = $('#hour-{i}').text();
+
+  const taskTime = $('#hour-16').text();
+  const taskInfo = $('#txtAr-4').val();
+
+
+  
+    var tInfo = localStorage.setItem('task', taskInfo);
+    var tTime = localStorage.setItem('time', taskTime);
+
+    var infoTime = tInfo + tTime
+
+tskCt(`${this}`)
+
+}); 
+
+// ****** SHOWS SAVED TASK ****** //
+const savedTask = localStorage.getItem('task')
+const savedTime = localStorage.getItem('time')
+const timeTask = savedTime + ' ' + savedTask;
+$('#savedTasks').text(timeTask);
+
+// ****** SHOWS SAVED TASK ****** //
+
+// ****** SAVE BUTTON ****** //
+
+
+// ****** TIME BLOCK ****** //
+
+
+
+// ****** TIME BLOCK ****** //
+
+
+
+////////  **************** Actual Functions  **************** //////
+
+
+
+*/ //  < ------ delete
+
+function updateTimeBlocks() {
+  // Get the current hour using Day.js
+  const currentHour = dayjs().hour();
+  // Loop through each time-block element
+  $('.time-block').each(function() {
+    // Get the hour for this time-block element from the data-hour attribute
+    const hour = parseInt($(this).data('hour'));
+    // Determine whether this time-block is in the past, present, or future
+    $(this).removeClass('past present future');
+    if (hour < currentHour) {
+      $(this).addClass('past');
+    } else if (hour === currentHour) {
+      $(this).addClass('present');
+    } else {
+      $(this).addClass('future');
+    }
+  });
+}
+
+
+////////  **************** Actual Functions  **************** //////
+
+
+////////  **************** play functions  **************** //////
+
+////////  **************** play functions  **************** //////
+
+
 $('.saveBtn').click(function() {
   $('.time-block').each(function() {
     const hour = $(this).find('.hour').text();
@@ -50,13 +133,11 @@ $('.saveBtn').click(function() {
       };
       localStorage.setItem('data-' + hour, JSON.stringify(data));
     }
+    
   });
 });
-// ****** SAVE BUTTON ****** 
 
-
-
-// ****** RETRIEVE SAVED DATA FROM LOCAL STORAGE ****** 
+// Retrieve and sort saved data by hour
 const savedData = [];
 for (let i = 0; i < localStorage.length; i++) {
   const key = localStorage.key(i);
@@ -65,44 +146,61 @@ for (let i = 0; i < localStorage.length; i++) {
     savedData.push(data);
   }
 }
+
+
 // trims data so that the saved data only shows tasks that do not have ''
 // and sorts data so that it shows accordingly
+
+
 const newData = savedData.filter(item => item.task.trim() !== '');
 sortData = newData.sort((a, b) => a - b);
 
 
-// ****** DISPLAY SAVED DATA FROM LOCAL STORAGE WITH REMOVE BUTTON ****** 
+console.log(sortData)
+
 newData.forEach((data) => {
   const hour = data.hour;
   const taskTime = data.task;
   const $li = $('<li class="row">');
   const $task = $('<div class="">').text(hour + '' + taskTime);
   const $removeBtn = $('<button type="button" class="btn-close btn-close-white" aria-label="Close">');
+
   $li.append($task);
   $li.append($removeBtn);
   $('#savedTasks').append($li);
+
+  $removeBtn.on('click', function() {
+    $li.remove();
+    // Clear textarea of corresponding time-block
+    $('.time-block[data-hour="' + hour + '"]').find('.description').val('');
+  });
+
+  $('.time-block[data-hour="' + hour + '"]').find('.description').val(taskTime);
+});
+//look up render method
+
+
+
+
+
+/*
+
+newData.forEach((data) => {
+  const hour = data.hour;
+  const taskTime = data.task;
+  const $li = $('<div>');
+  const $task = $('<li>').text(hour + '' + taskTime);
+  const $removeBtn = $('<button type="button" class="btn-close btn-close-white" aria-label="Close">');
+  $li.append($task);
+  $li.append($removeBtn);
+  $('#savedTasks').append($li);
+
+
   $removeBtn.on('click', function() {
     $li.remove();
   });
 });
 
-// ****** TIME BLOCK ****** //
-function updateTimeBlocks() {
-  // Gets the current hour using Day.js
-  const currentHour = dayjs().hour();
-  // Loops through each time-block element
-  $('.time-block').each(function() {
-    // Get data for this time-block element from the data-hour attribute
-    const hour = parseInt($(this).data('hour'));
-    // compares data-hour to day()js and determines whether this time-block is in the past, present, or future
-    $(this).removeClass('past present future');
-    if (hour < currentHour) {
-      $(this).addClass('past');
-    } else if (hour === currentHour) {
-      $(this).addClass('present');
-    } else {
-      $(this).addClass('future');
-    }
-  });
-}
+*/
+
 
