@@ -48,49 +48,27 @@
 //TODO NEEDS a way to store id hour text
 
 /* //  < ------ delete
-
-
 $('.saveBtn').click(function() {
   
   //const taskTime = $('#hour-{i}').text();
-
   const taskTime = $('#hour-16').text();
   const taskInfo = $('#txtAr-4').val();
-
-
   
     var tInfo = localStorage.setItem('task', taskInfo);
     var tTime = localStorage.setItem('time', taskTime);
-
     var infoTime = tInfo + tTime
-
 tskCt(`${this}`)
-
 }); 
-
 // ****** SHOWS SAVED TASK ****** //
 const savedTask = localStorage.getItem('task')
 const savedTime = localStorage.getItem('time')
 const timeTask = savedTime + ' ' + savedTask;
 $('#savedTasks').text(timeTask);
-
 // ****** SHOWS SAVED TASK ****** //
-
 // ****** SAVE BUTTON ****** //
-
-
 // ****** TIME BLOCK ****** //
-
-
-
 // ****** TIME BLOCK ****** //
-
-
-
 ////////  **************** Actual Functions  **************** //////
-
-
-
 */ //  < ------ delete
 
 function updateTimeBlocks() {
@@ -184,7 +162,6 @@ newData.forEach((data) => {
 
 
 /*
-
 newData.forEach((data) => {
   const hour = data.hour;
   const taskTime = data.task;
@@ -194,13 +171,8 @@ newData.forEach((data) => {
   $li.append($task);
   $li.append($removeBtn);
   $('#savedTasks').append($li);
-
-
   $removeBtn.on('click', function() {
     $li.remove();
   });
 });
-
 */
-
-
