@@ -1,35 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  //  Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // *DONE* Add code to display the current date in the header of the page.
-
-
-//** ***GLOBAL SCOPE *** **/
-
-
-//** ***GLOBAL SCOPE *** **/
-
-
-
-
-
 // ****** CURRENT DATE & TIME ****** //
  setInterval(function() {
   curDay = dayjs();
@@ -39,38 +7,7 @@
 }, 1000);
 // ****** CURRENT DATE & TIME ****** //
 
-
-
-
-
-
-// ****** SAVE BUTTON ****** //
-//TODO NEEDS a way to store id hour text
-
-/* //  < ------ delete
-$('.saveBtn').click(function() {
-  
-  //const taskTime = $('#hour-{i}').text();
-  const taskTime = $('#hour-16').text();
-  const taskInfo = $('#txtAr-4').val();
-  
-    var tInfo = localStorage.setItem('task', taskInfo);
-    var tTime = localStorage.setItem('time', taskTime);
-    var infoTime = tInfo + tTime
-tskCt(`${this}`)
-}); 
-// ****** SHOWS SAVED TASK ****** //
-const savedTask = localStorage.getItem('task')
-const savedTime = localStorage.getItem('time')
-const timeTask = savedTime + ' ' + savedTask;
-$('#savedTasks').text(timeTask);
-// ****** SHOWS SAVED TASK ****** //
-// ****** SAVE BUTTON ****** //
-// ****** TIME BLOCK ****** //
-// ****** TIME BLOCK ****** //
-////////  **************** Actual Functions  **************** //////
-*/ //  < ------ delete
-
+// ****** UPDATES BLOCK ******  //
 function updateTimeBlocks() {
   // Get the current hour using Day.js
   const currentHour = dayjs().hour();
@@ -89,16 +26,10 @@ function updateTimeBlocks() {
     }
   });
 }
+// ****** UPDATES BLOCK ******  //
 
 
-////////  **************** Actual Functions  **************** //////
-
-
-////////  **************** play functions  **************** //////
-
-////////  **************** play functions  **************** //////
-
-
+// ****** SAVES DATA ****** //
 $('.saveBtn').click(function() {
   $('.time-block').each(function() {
     const hour = $(this).find('.hour').text();
@@ -115,6 +46,8 @@ $('.saveBtn').click(function() {
   });
 });
 
+// ****** SAVES DATA ****** //
+
 // Retrieve and sort saved data by hour
 const savedData = [];
 for (let i = 0; i < localStorage.length; i++) {
@@ -125,22 +58,17 @@ for (let i = 0; i < localStorage.length; i++) {
   }
 }
 
-
-// trims data so that the saved data only shows tasks that do not have ''
-// and sorts data so that it shows accordingly
-
-
+// ****** CREATES ELEMENTS FROM SAVED DATA AND DISPLAYS ON SAVED TASKS BOX ****** //
+// *trims data so that the saved data only shows tasks that do not have ''
+// *sorts data so that it shows accordingly
 const newData = savedData.filter(item => item.task.trim() !== '');
 sortData = newData.sort((a, b) => a - b);
-
-
-console.log(sortData)
 
 newData.forEach((data) => {
   const hour = data.hour;
   const taskTime = data.task;
   const $li = $('<li class="row">');
-  const $task = $('<div class="">').text(hour + '' + taskTime);
+  const $task = $('<div class="task">').text(hour + '  -  ' + taskTime);
   const $removeBtn = $('<button type="button" class="btn-close btn-close-white" aria-label="Close">');
 
   $li.append($task);
@@ -155,24 +83,20 @@ newData.forEach((data) => {
 
   $('.time-block[data-hour="' + hour + '"]').find('.description').val(taskTime);
 });
-//look up render method
+// ****** CREATES ELEMENTS FROM SAVED DATA AND DISPLAYS ON SAVED TASKS BOX ****** //
 
+// ****** LOADS SAVED TASK IN INPUT TEXTAREA WHERE IT WAS WRITTEN ****** //
+$(document).ready(function() {
 
-
-
-
-/*
-newData.forEach((data) => {
-  const hour = data.hour;
-  const taskTime = data.task;
-  const $li = $('<div>');
-  const $task = $('<li>').text(hour + '' + taskTime);
-  const $removeBtn = $('<button type="button" class="btn-close btn-close-white" aria-label="Close">');
-  $li.append($task);
-  $li.append($removeBtn);
-  $('#savedTasks').append($li);
-  $removeBtn.on('click', function() {
-    $li.remove();
+  $('.time-block').each(function() {
+    const hour = $(this).find("div").text()
+    console.log(hour);
+    const savedData = localStorage.getItem( "data-" + hour);
+    if (savedData) {
+     const task = JSON.parse(savedData).task;
+  
+      $(this).find('.description').val(task);
+    }
   });
 });
-*/
+// ****** LOADS SAVED TASK IN INPUT TEXTAREA WHERE IT WAS WRITTEN ****** //
