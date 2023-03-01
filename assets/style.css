@@ -5,8 +5,9 @@
   --wht: white;
   --rd: red;
   --gr: gray; 
-
   color: var(--gy);
+  font-family: 'Shantell Sans', cursive;
+
 }
 
 
@@ -20,9 +21,9 @@ body {
 
 textarea {
   background: transparent;
-  border: none;
+  border: 10px, var(--blk);
   resize: none;
-  color: #000000;
+  color: var(--blk);
   border-left: 1px solid black;
   padding: 10px;
 }
@@ -33,10 +34,11 @@ textarea {
 
 .time-block {
   border-radius: 15px;
+
 }
 
 .row {
-  border-top: 1px solid white;
+  border-top: 3px solid var(--gy);
 }
 
 .hour {
@@ -62,7 +64,7 @@ textarea {
 }
 
 .saveBtn {
-  border-left: 1px solid black;
+  border-left: 10px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06aed5;

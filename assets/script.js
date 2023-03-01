@@ -7,7 +7,7 @@
 }, 1000);
 // ****** CURRENT DATE & TIME ****** //
 
-// ****** UPDATES BLOCK ******  //
+// ****** UPDATES TIME BLOCK ******  //
 function updateTimeBlocks() {
   // Get the current hour using Day.js
   const currentHour = dayjs().hour();
@@ -26,7 +26,7 @@ function updateTimeBlocks() {
     }
   });
 }
-// ****** UPDATES BLOCK ******  //
+// ****** UPDATES TIME BLOCK ******  //
 
 
 // ****** SAVES DATA ****** //
